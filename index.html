@@ -11,11 +11,13 @@
   --y:#FFD93D;--yd:#E6B800;--yl:#FFF3A3;
   --bg:#0D0D0D;--bg2:#141414;--bg3:#1C1C1C;
   --text:#F5F5F5;--muted:#888;--border:rgba(255,217,61,0.2);
+  --discord:#5865F2;--discord-dark:#4752C4;
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
 
 nav{
+  position:sticky;top:0;z-index:100;
   background:rgba(13,13,13,0.92);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--border);
   padding:0 2rem;height:60px;
@@ -23,9 +25,15 @@ nav{
 }
 .nav-logo{font-size:1.3rem;font-weight:800;color:var(--y);letter-spacing:-0.5px}
 .nav-logo span{color:var(--text);font-weight:400;font-size:0.85rem;margin-left:6px;opacity:0.5}
-.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center}
 .nav-links a{font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
 .nav-links a:hover{color:var(--y)}
+.nav-discord{
+  font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  color:#fff;background:var(--discord);padding:0.4rem 1rem;border-radius:6px;
+  text-decoration:none;transition:background 0.2s;
+}
+.nav-discord:hover{background:var(--discord-dark);color:#fff}
 
 .hero{
   min-height:92vh;display:flex;flex-direction:column;
@@ -87,6 +95,73 @@ section{padding:5rem 2rem}
 .sec-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-1px;margin-bottom:0.5rem}
 .sec-sub{font-size:0.9rem;color:var(--muted);margin-bottom:3rem;max-width:500px}
 
+/* DISCORD BANNER SECTION */
+.discord-section{
+  background:linear-gradient(135deg,#1a1c3a 0%,#111 60%,#0D0D0D 100%);
+  border-top:1px solid rgba(88,101,242,0.3);
+  border-bottom:1px solid rgba(88,101,242,0.3);
+  padding:4rem 2rem;
+}
+.discord-inner{
+  max-width:860px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:2rem;flex-wrap:wrap;
+}
+.discord-left{flex:1;min-width:260px}
+.discord-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
+  color:#8891f7;background:rgba(88,101,242,0.12);border:1px solid rgba(88,101,242,0.3);
+  padding:0.35rem 0.9rem;border-radius:999px;margin-bottom:1.2rem;
+}
+.discord-badge-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite}
+.discord-title{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:0.8rem}
+.discord-title span{color:#8891f7}
+.discord-desc{font-size:0.9rem;color:var(--muted);line-height:1.7;max-width:400px}
+.discord-right{display:flex;flex-direction:column;gap:0.8rem;align-items:flex-start}
+.btn-discord-big{
+  display:inline-flex;align-items:center;gap:0.7rem;
+  font-size:0.85rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  color:#fff;background:var(--discord);padding:1rem 2rem;border-radius:10px;
+  text-decoration:none;transition:background 0.2s,transform 0.15s;white-space:nowrap;
+}
+.btn-discord-big:hover{background:var(--discord-dark);transform:translateY(-2px)}
+.btn-discord-big svg{width:20px;height:20px;flex-shrink:0}
+.discord-members{font-size:0.75rem;color:var(--muted);display:flex;align-items:center;gap:0.5rem}
+.discord-members-dot{width:6px;height:6px;border-radius:50%;background:#4ade80}
+.discord-perks{margin-top:1.5rem;display:flex;flex-direction:column;gap:0.6rem}
+.discord-perk{display:flex;align-items:center;gap:0.7rem;font-size:0.82rem;color:var(--muted)}
+.discord-perk-icon{
+  width:28px;height:28px;border-radius:6px;
+  background:rgba(88,101,242,0.15);border:1px solid rgba(88,101,242,0.25);
+  display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0;
+}
+
+/* SOCIAL / LINKS HUB SECTION */
+.links-section{background:var(--bg3);padding:4rem 2rem}
+.links-inner{max-width:700px;margin:0 auto}
+.links-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.link-card{
+  display:flex;align-items:center;gap:1rem;
+  background:var(--bg2);border:1px solid var(--border);border-radius:12px;
+  padding:1.2rem 1.4rem;text-decoration:none;
+  transition:border-color 0.2s,transform 0.2s;
+}
+.link-card:hover{border-color:var(--y);transform:translateY(-2px)}
+.link-icon{
+  width:42px;height:42px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;
+}
+.link-icon.yt{background:rgba(255,0,0,0.15);border:1px solid rgba(255,0,0,0.25)}
+.link-icon.dc{background:rgba(88,101,242,0.15);border:1px solid rgba(88,101,242,0.25)}
+.link-icon.tw{background:rgba(29,161,242,0.12);border:1px solid rgba(29,161,242,0.25)}
+.link-icon.tk{background:rgba(255,0,80,0.12);border:1px solid rgba(255,0,80,0.25)}
+.link-label{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem}
+.link-name{font-size:0.95rem;font-weight:800;color:var(--text)}
+.link-arrow{margin-left:auto;color:var(--muted);font-size:1rem;transition:transform 0.2s}
+.link-card:hover .link-arrow{transform:translateX(3px);color:var(--y)}
+
+/* CLIPS */
 .clips-section{background:var(--bg)}
 .clips-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .clip-card{
@@ -120,6 +195,7 @@ section{padding:5rem 2rem}
   padding:2px 8px;border-radius:999px;margin-bottom:0.5rem;
 }
 
+/* SERVER */
 .server-section{background:var(--bg2)}
 .server-intro{
   display:flex;align-items:center;gap:1rem;
@@ -129,7 +205,6 @@ section{padding:5rem 2rem}
 .server-dot{width:10px;height:10px;border-radius:50%;background:#4ade80;flex-shrink:0;animation:pulse 2s infinite}
 .server-ip{font-family:monospace;font-size:1rem;font-weight:700;color:var(--y)}
 .server-players{font-size:0.8rem;color:var(--muted);margin-top:2px}
-
 .ranks-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.8rem;margin-bottom:2.5rem}
 .rank-card{
   background:var(--bg3);border:1px solid var(--border);border-radius:10px;
@@ -140,20 +215,17 @@ section{padding:5rem 2rem}
 .rank-icon{font-size:1.8rem;margin-bottom:0.5rem;display:block}
 .rank-name{font-size:0.8rem;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:0.3rem}
 .rank-desc{font-size:0.72rem;color:var(--muted);line-height:1.5}
-
 .rank-card.wood{border-color:#8B7355}.rank-card.wood .rank-name{color:#A0856A}
 .rank-card.stone{border-color:#888}.rank-card.stone .rank-name{color:#aaa}
 .rank-card.iron{border-color:#88AABB}.rank-card.iron .rank-name{color:#9FC0D0}
 .rank-card.gold{border-color:var(--y)}.rank-card.gold .rank-name{color:var(--y)}
 .rank-card.diamond{border-color:#5DD9F8}.rank-card.diamond .rank-name{color:#5DD9F8}
 .rank-card.netherite{border-color:#9B6F9B}.rank-card.netherite .rank-name{color:#BF8FBF}
-
 .sec-label2{font-size:0.8rem;font-weight:700;color:var(--y);margin-bottom:1rem;letter-spacing:0.1em;text-transform:uppercase}
 .crates-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
 .crate-card{
   background:var(--bg3);border:1px solid var(--border);border-radius:12px;
-  padding:1.5rem 1.2rem;
-  transition:border-color 0.2s,transform 0.2s;
+  padding:1.5rem 1.2rem;transition:border-color 0.2s,transform 0.2s;
 }
 .crate-card:hover{border-color:var(--y);transform:translateY(-2px)}
 .crate-icon{font-size:2.2rem;margin-bottom:0.8rem;display:block}
@@ -168,6 +240,7 @@ section{padding:5rem 2rem}
 .tag-epic{background:rgba(160,80,255,0.15);color:#BB78FF}
 .tag-legendary{background:rgba(255,170,0,0.15);color:#FFB400}
 
+/* JOIN / CTA */
 .join-section{
   text-align:center;padding:6rem 2rem;
   background:var(--bg);border-top:1px solid var(--border);
@@ -177,18 +250,21 @@ section{padding:5rem 2rem}
 .join-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 .discord-btn{
   font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
-  color:#fff;background:#5865F2;padding:0.85rem 2rem;border-radius:8px;
+  color:#fff;background:var(--discord);padding:0.85rem 2rem;border-radius:8px;
   text-decoration:none;transition:background 0.2s,transform 0.15s;
 }
-.discord-btn:hover{background:#4752C4;transform:translateY(-2px)}
+.discord-btn:hover{background:var(--discord-dark);transform:translateY(-2px)}
 
 footer{
   padding:1.5rem 2rem;border-top:1px solid var(--border);
   display:flex;justify-content:space-between;align-items:center;
-  background:var(--bg2);
+  background:var(--bg2);flex-wrap:wrap;gap:1rem;
 }
 .footer-copy{font-size:0.68rem;color:var(--muted)}
 .footer-logo{font-size:1rem;font-weight:900;color:var(--y)}
+.footer-links{display:flex;gap:1.2rem}
+.footer-links a{font-size:0.68rem;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--y)}
 
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
@@ -201,7 +277,8 @@ footer{
   <ul class="nav-links">
     <li><a href="#clips">Streams</a></li>
     <li><a href="#server">Server</a></li>
-    <li><a href="#join">Join</a></li>
+    <li><a href="#links">Socials</a></li>
+    <li><a href="https://discord.gg" class="nav-discord">Discord</a></li>
   </ul>
 </nav>
 
@@ -209,9 +286,10 @@ footer{
   <div class="hero-glow"></div>
   <div class="hero-tag">Streaming on YouTube</div>
   <h1><span class="hl">HVNNER</span></h1>
-  <p class="hero-sub">Streams, Clips, and good vibes. Join the community — the server is coming soon.</p>
+  <p class="hero-sub">Streams, clips, and good vibes. Join the community — the server is coming soon.</p>
   <div class="hero-btns">
-    <a href="https://youtube.com" class="btn-y">Watch hvnner</a>
+    <a href="https://youtube.com/@hvnner" class="btn-y">Watch hvnner</a>
+    <a href="https://discord.gg" class="discord-btn">Join Discord</a>
     <a href="#server" class="btn-outline">Server info</a>
   </div>
 </div>
@@ -223,7 +301,7 @@ footer{
     <div class="ticker-item">Subscribe on YouTube</div>
     <div class="ticker-item">New Crates</div>
     <div class="ticker-item">Join the Discord</div>
-    <div class="ticker-item">Now Streaming</div>
+    <div class="ticker-item">Streaming Every Week</div>
     <div class="ticker-item">Server Coming Soon</div>
     <div class="ticker-item">Subscribe on YouTube</div>
     <div class="ticker-item">New Crates</div>
@@ -231,10 +309,41 @@ footer{
   </div>
 </div>
 
+<!-- DISCORD SECTION -->
+<div class="discord-section" id="discord">
+  <div class="discord-inner">
+    <div class="discord-left fade-in">
+      <div class="discord-badge">
+        <span class="discord-badge-dot"></span>
+        Community
+      </div>
+      <div class="discord-title">Join the <span>Discord</span></div>
+      <p class="discord-desc">Hang out, get server updates, flex your in-game wins, and be the first to know when the server goes live.</p>
+      <div class="discord-perks">
+        <div class="discord-perk"><div class="discord-perk-icon">🔔</div>Server launch notifications</div>
+        <div class="discord-perk"><div class="discord-perk-icon">🎮</div>Minecraft events & giveaways</div>
+        <div class="discord-perk"><div class="discord-perk-icon">💬</div>Chat with hvnner directly</div>
+        <div class="discord-perk"><div class="discord-perk-icon">🏆</div>Exclusive roles for members</div>
+      </div>
+    </div>
+    <div class="discord-right fade-in">
+      <a href="https://discord.gg" class="btn-discord-big">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Join the Discord
+      </a>
+      <div class="discord-members">
+        <span class="discord-members-dot"></span>
+        Server launching soon — be first in
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CLIPS -->
 <section class="clips-section" id="clips">
   <div class="sec-label fade-in">Stream highlights</div>
   <div class="sec-title fade-in">Best clips</div>
-  <p class="sec-sub fade-in">The wildest moments from hvnner's streams. Add real YouTube clips here when ready.</p>
+  <p class="sec-sub fade-in">The wildest moments from hvnner's streams. Swap in real YouTube links when you're ready.</p>
   <div class="clips-grid">
     <div class="clip-card fade-in">
       <div class="clip-thumb">
@@ -270,24 +379,23 @@ footer{
   </div>
 </section>
 
+<!-- SERVER -->
 <section class="server-section" id="server">
   <div class="sec-label fade-in">Minecraft server</div>
   <div class="sec-title fade-in">Join the server</div>
   <p class="sec-sub fade-in">Survival, ranks, crates, and community events. Something for every kind of player.</p>
-
   <div class="server-intro fade-in">
     <div class="server-dot"></div>
     <div>
       <div class="server-ip">Server IP: Coming soon</div>
-      <div class="server-players">Coming soon — be the first in</div>
+      <div class="server-players">Be the first in — join Discord for the launch announcement</div>
     </div>
   </div>
-
   <div class="sec-label2 fade-in">Ranks</div>
   <div class="ranks-grid">
     <div class="rank-card wood fade-in">
       <span class="rank-icon">🪵</span>
-      <div class="rank-name"></div>
+      <div class="rank-name">Wood</div>
       <div class="rank-desc">Starter rank. Free for everyone.</div>
     </div>
     <div class="rank-card stone fade-in">
@@ -316,7 +424,6 @@ footer{
       <div class="rank-desc">Top tier. All perks + Discord role.</div>
     </div>
   </div>
-
   <div class="sec-label2 fade-in">Crates</div>
   <div class="crates-grid">
     <div class="crate-card fade-in">
@@ -346,17 +453,67 @@ footer{
   </div>
 </section>
 
+<!-- SOCIALS / LINKS HUB -->
+<section class="links-section" id="links">
+  <div class="links-inner">
+    <div class="sec-label fade-in">Find hvnner</div>
+    <div class="sec-title fade-in">Socials & links</div>
+    <p class="sec-sub fade-in">Everything in one place. Click to follow, subscribe, and stay connected.</p>
+    <div class="links-grid">
+      <a href="https://youtube.com/@hvnner" class="link-card fade-in">
+        <div class="link-icon yt">▶</div>
+        <div>
+          <div class="link-label">YouTube</div>
+          <div class="link-name">@hvnner</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="https://discord.gg" class="link-card fade-in">
+        <div class="link-icon dc">💬</div>
+        <div>
+          <div class="link-label">Discord</div>
+          <div class="link-name">hvnner server</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="https://twitter.com" class="link-card fade-in">
+        <div class="link-icon tw">𝕏</div>
+        <div>
+          <div class="link-label">Twitter / X</div>
+          <div class="link-name">@hvnner</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      <a href="https://tiktok.com" class="link-card fade-in">
+        <div class="link-icon tk">♪</div>
+        <div>
+          <div class="link-label">TikTok</div>
+          <div class="link-name">@hvnner</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN CTA -->
 <section class="join-section" id="join">
   <h2 class="fade-in">Ready to <span style="color:var(--y)">play?</span></h2>
   <p class="fade-in">Subscribe on YouTube and join the Discord to get notified when the server opens.</p>
   <div class="join-btns">
-    <a href="https://youtube.com" class="btn-y fade-in">Subscribe on YouTube</a>
+    <a href="https://youtube.com/@hvnner" class="btn-y fade-in">Subscribe on YouTube</a>
     <a href="https://discord.gg" class="discord-btn fade-in">Join the Discord</a>
   </div>
 </section>
 
 <footer>
   <div class="footer-logo">hvnner</div>
+  <div class="footer-links">
+    <a href="#clips">Streams</a>
+    <a href="#server">Server</a>
+    <a href="#links">Socials</a>
+    <a href="https://discord.gg">Discord</a>
+  </div>
   <div class="footer-copy">© 2026 hvnnerMC. All rights reserved.</div>
 </footer>
 
