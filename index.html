@@ -1,530 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hvnner</title>
-</head>
+<meta charset="UTF-8">
+<title>Monster Energy checklist</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --y:#FFD93D;--yd:#E6B800;--yl:#FFF3A3;
-  --bg:#0D0D0D;--bg2:#141414;--bg3:#1C1C1C;
-  --text:#F5F5F5;--muted:#888;--border:rgba(255,217,61,0.2);
-  --discord:#5865F2;--discord-dark:#4752C4;
-}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
+  :root{
+    --bg:#0b0e0a;
+    --card:#12160f;
+    --line:#2a3324;
+    --green:#8fd400;
+    --green-dim:#3f5a1a;
+    --text:#eef3e6;
+    --text-dim:#8ea082;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    padding:20px 14px 60px;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+  header{text-align:center;margin-bottom:18px;}
+  h1{
+    font-size:26px;
+    letter-spacing:1px;
+    margin:0 0 4px;
+    color:var(--green);
+    text-transform:uppercase;
+    font-weight:800;
+  }
+  header p{margin:0;color:var(--text-dim);font-size:13px;}
 
-nav{
-  position:sticky;top:0;z-index:100;
-  background:rgba(13,13,13,0.92);backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--border);
-  padding:0 2rem;height:60px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.nav-logo{font-size:1.3rem;font-weight:800;color:var(--y);letter-spacing:-0.5px}
-.nav-logo span{color:var(--text);font-weight:400;font-size:0.85rem;margin-left:6px;opacity:0.5}
-.nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center}
-.nav-links a{font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
-.nav-links a:hover{color:var(--y)}
-.nav-discord{
-  font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
-  color:#fff;background:var(--discord);padding:0.4rem 1rem;border-radius:6px;
-  text-decoration:none;transition:background 0.2s;
-}
-.nav-discord:hover{background:var(--discord-dark);color:#fff}
+  .progress-bar-outer{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:999px;
+    height:14px;
+    margin:16px 0 6px;
+    overflow:hidden;
+  }
+  .progress-bar-inner{
+    height:100%;
+    background:linear-gradient(90deg,var(--green-dim),var(--green));
+    width:0%;
+    transition:width .3s ease;
+  }
+  .progress-label{
+    text-align:center;
+    font-size:13px;
+    color:var(--text-dim);
+    margin-bottom:10px;
+  }
+  .progress-label strong{color:var(--green);}
 
-.hero{
-  min-height:92vh;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  text-align:center;padding:4rem 2rem 2rem;
-  position:relative;overflow:hidden;
-}
-.hero-glow{
-  position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:500px;height:500px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,217,61,0.1) 0%,transparent 70%);
-  pointer-events:none;
-}
-.hero-tag{
-  font-size:0.7rem;font-weight:700;letter-spacing:0.2em;
-  text-transform:uppercase;color:var(--yd);
-  background:rgba(255,217,61,0.1);border:1px solid var(--border);
-  padding:0.4rem 1rem;border-radius:999px;
-  margin-bottom:1.5rem;display:inline-block;
-}
-.hero h1{
-  font-size:clamp(3rem,10vw,7rem);font-weight:900;
-  line-height:0.95;letter-spacing:-3px;
-  color:var(--text);margin-bottom:1rem;
-}
-.hero h1 .hl{color:var(--y)}
-.hero-sub{font-size:1rem;color:var(--muted);max-width:420px;line-height:1.7;margin-bottom:2.5rem}
-.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn-y{
-  font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-  color:#000;background:var(--y);padding:0.8rem 2rem;border-radius:8px;
-  text-decoration:none;border:none;cursor:pointer;transition:background 0.2s,transform 0.15s;
-}
-.btn-y:hover{background:var(--yl);transform:translateY(-2px)}
-.btn-outline{
-  font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--y);background:transparent;padding:0.8rem 2rem;border-radius:8px;
-  text-decoration:none;border:2px solid var(--border);transition:border-color 0.2s,transform 0.15s;
-}
-.btn-outline:hover{border-color:var(--y);transform:translateY(-2px)}
+  .controls{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    margin-bottom:22px;
+    flex-wrap:wrap;
+  }
+  button.ctrl{
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--text-dim);
+    padding:6px 12px;
+    border-radius:6px;
+    font-size:12px;
+    cursor:pointer;
+  }
+  button.ctrl:hover{border-color:var(--green);color:var(--green);}
 
-.ticker{
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  overflow:hidden;padding:0.6rem 0;background:var(--bg2);
-}
-.ticker-inner{display:flex;gap:2.5rem;width:max-content;animation:tick 20s linear infinite}
-.ticker-item{
-  font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
-  color:var(--yd);white-space:nowrap;display:flex;align-items:center;gap:2.5rem;
-}
-.ticker-item::after{content:'★';font-size:0.5rem;color:var(--y)}
+  .section{margin-bottom:26px;}
+  .section-title{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    color:var(--green);
+    border-bottom:1px solid var(--line);
+    padding-bottom:6px;
+    margin-bottom:10px;
+    display:flex;
+    justify-content:space-between;
+  }
+  .section-title span.count{color:var(--text-dim);letter-spacing:0;text-transform:none;font-size:12px;}
 
-section{padding:5rem 2rem}
-.sec-label{
-  font-size:0.68rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
-  color:var(--y);margin-bottom:0.6rem;
-}
-.sec-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;letter-spacing:-1px;margin-bottom:0.5rem}
-.sec-sub{font-size:0.9rem;color:var(--muted);margin-bottom:3rem;max-width:500px}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:8px;
+  }
+  .item{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:10px 12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+    user-select:none;
+    transition:border-color .15s, background .15s;
+  }
+  .item:hover{border-color:var(--green-dim);}
+  .item.checked{
+    background:rgba(143,212,0,0.08);
+    border-color:var(--green);
+  }
+  .box{
+    flex:0 0 18px;
+    width:18px;
+    height:18px;
+    border:1.5px solid var(--text-dim);
+    border-radius:4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    color:var(--bg);
+  }
+  .item.checked .box{
+    background:var(--green);
+    border-color:var(--green);
+  }
+  .item.checked .box::after{content:"✓";color:#0b0e0a;font-weight:800;}
+  .label{font-size:13.5px;line-height:1.3;}
+  .item.checked .label{color:var(--text-dim);text-decoration:line-through;}
 
-/* DISCORD BANNER SECTION */
-.discord-section{
-  background:linear-gradient(135deg,#1a1c3a 0%,#111 60%,#0D0D0D 100%);
-  border-top:1px solid rgba(88,101,242,0.3);
-  border-bottom:1px solid rgba(88,101,242,0.3);
-  padding:4rem 2rem;
-}
-.discord-inner{
-  max-width:860px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:2rem;flex-wrap:wrap;
-}
-.discord-left{flex:1;min-width:260px}
-.discord-badge{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
-  color:#8891f7;background:rgba(88,101,242,0.12);border:1px solid rgba(88,101,242,0.3);
-  padding:0.35rem 0.9rem;border-radius:999px;margin-bottom:1.2rem;
-}
-.discord-badge-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite}
-.discord-title{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:0.8rem}
-.discord-title span{color:#8891f7}
-.discord-desc{font-size:0.9rem;color:var(--muted);line-height:1.7;max-width:400px}
-.discord-right{display:flex;flex-direction:column;gap:0.8rem;align-items:flex-start}
-.btn-discord-big{
-  display:inline-flex;align-items:center;gap:0.7rem;
-  font-size:0.85rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
-  color:#fff;background:var(--discord);padding:1rem 2rem;border-radius:10px;
-  text-decoration:none;transition:background 0.2s,transform 0.15s;white-space:nowrap;
-}
-.btn-discord-big:hover{background:var(--discord-dark);transform:translateY(-2px)}
-.btn-discord-big svg{width:20px;height:20px;flex-shrink:0}
-.discord-members{font-size:0.75rem;color:var(--muted);display:flex;align-items:center;gap:0.5rem}
-.discord-members-dot{width:6px;height:6px;border-radius:50%;background:#4ade80}
-.discord-perks{margin-top:1.5rem;display:flex;flex-direction:column;gap:0.6rem}
-.discord-perk{display:flex;align-items:center;gap:0.7rem;font-size:0.82rem;color:var(--muted)}
-.discord-perk-icon{
-  width:28px;height:28px;border-radius:6px;
-  background:rgba(88,101,242,0.15);border:1px solid rgba(88,101,242,0.25);
-  display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0;
-}
-
-/* SOCIAL / LINKS HUB SECTION */
-.links-section{background:var(--bg3);padding:4rem 2rem}
-.links-inner{max-width:700px;margin:0 auto}
-.links-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
-.link-card{
-  display:flex;align-items:center;gap:1rem;
-  background:var(--bg2);border:1px solid var(--border);border-radius:12px;
-  padding:1.2rem 1.4rem;text-decoration:none;
-  transition:border-color 0.2s,transform 0.2s;
-}
-.link-card:hover{border-color:var(--y);transform:translateY(-2px)}
-.link-icon{
-  width:42px;height:42px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;
-}
-.link-icon.yt{background:rgba(255,0,0,0.15);border:1px solid rgba(255,0,0,0.25)}
-.link-icon.dc{background:rgba(88,101,242,0.15);border:1px solid rgba(88,101,242,0.25)}
-.link-icon.tw{background:rgba(29,161,242,0.12);border:1px solid rgba(29,161,242,0.25)}
-.link-icon.tk{background:rgba(255,0,80,0.12);border:1px solid rgba(255,0,80,0.25)}
-.link-label{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem}
-.link-name{font-size:0.95rem;font-weight:800;color:var(--text)}
-.link-arrow{margin-left:auto;color:var(--muted);font-size:1rem;transition:transform 0.2s}
-.link-card:hover .link-arrow{transform:translateX(3px);color:var(--y)}
-
-/* CLIPS */
-.clips-section{background:var(--bg)}
-.clips-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.clip-card{
-  background:var(--bg3);border:1px solid var(--border);border-radius:12px;overflow:hidden;
-  transition:border-color 0.2s,transform 0.2s;cursor:pointer;
-}
-.clip-card:hover{border-color:var(--y);transform:translateY(-3px)}
-.clip-card:first-child{grid-column:1/-1}
-.clip-thumb{
-  height:180px;background:var(--bg2);
-  display:flex;align-items:center;justify-content:center;position:relative;
-}
-.clip-card:first-child .clip-thumb{height:260px}
-.play-btn{
-  width:52px;height:52px;border-radius:50%;
-  background:var(--y);display:flex;align-items:center;justify-content:center;
-  transition:transform 0.2s;
-}
-.clip-card:hover .play-btn{transform:scale(1.1)}
-.play-icon{width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:18px solid #000;margin-left:4px}
-.clip-letter{
-  position:absolute;font-size:7rem;font-weight:900;
-  color:rgba(255,217,61,0.05);letter-spacing:-5px;pointer-events:none;
-}
-.clip-info{padding:1rem 1.2rem}
-.clip-title{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:0.3rem}
-.clip-meta{font-size:0.75rem;color:var(--muted)}
-.clip-badge{
-  display:inline-block;font-size:0.6rem;font-weight:700;letter-spacing:0.12em;
-  text-transform:uppercase;background:rgba(255,217,61,0.15);color:var(--yd);
-  padding:2px 8px;border-radius:999px;margin-bottom:0.5rem;
-}
-
-/* SERVER */
-.server-section{background:var(--bg2)}
-.server-intro{
-  display:flex;align-items:center;gap:1rem;
-  background:rgba(255,217,61,0.06);border:1px solid var(--border);
-  border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:2.5rem;
-}
-.server-dot{width:10px;height:10px;border-radius:50%;background:#4ade80;flex-shrink:0;animation:pulse 2s infinite}
-.server-ip{font-family:monospace;font-size:1rem;font-weight:700;color:var(--y)}
-.server-players{font-size:0.8rem;color:var(--muted);margin-top:2px}
-.ranks-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.8rem;margin-bottom:2.5rem}
-.rank-card{
-  background:var(--bg3);border:1px solid var(--border);border-radius:10px;
-  padding:1.2rem 1rem;text-align:center;
-  transition:border-color 0.2s,transform 0.2s;
-}
-.rank-card:hover{transform:translateY(-2px)}
-.rank-icon{font-size:1.8rem;margin-bottom:0.5rem;display:block}
-.rank-name{font-size:0.8rem;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:0.3rem}
-.rank-desc{font-size:0.72rem;color:var(--muted);line-height:1.5}
-.rank-card.wood{border-color:#8B7355}.rank-card.wood .rank-name{color:#A0856A}
-.rank-card.stone{border-color:#888}.rank-card.stone .rank-name{color:#aaa}
-.rank-card.iron{border-color:#88AABB}.rank-card.iron .rank-name{color:#9FC0D0}
-.rank-card.gold{border-color:var(--y)}.rank-card.gold .rank-name{color:var(--y)}
-.rank-card.diamond{border-color:#5DD9F8}.rank-card.diamond .rank-name{color:#5DD9F8}
-.rank-card.netherite{border-color:#9B6F9B}.rank-card.netherite .rank-name{color:#BF8FBF}
-.sec-label2{font-size:0.8rem;font-weight:700;color:var(--y);margin-bottom:1rem;letter-spacing:0.1em;text-transform:uppercase}
-.crates-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
-.crate-card{
-  background:var(--bg3);border:1px solid var(--border);border-radius:12px;
-  padding:1.5rem 1.2rem;transition:border-color 0.2s,transform 0.2s;
-}
-.crate-card:hover{border-color:var(--y);transform:translateY(-2px)}
-.crate-icon{font-size:2.2rem;margin-bottom:0.8rem;display:block}
-.crate-name{font-size:0.9rem;font-weight:800;margin-bottom:0.4rem}
-.crate-desc{font-size:0.78rem;color:var(--muted);line-height:1.6}
-.crate-tag{
-  display:inline-block;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-  padding:3px 8px;border-radius:999px;margin-top:0.6rem;
-}
-.tag-common{background:rgba(100,200,100,0.15);color:#6DC96D}
-.tag-rare{background:rgba(80,130,255,0.15);color:#6B9FFF}
-.tag-epic{background:rgba(160,80,255,0.15);color:#BB78FF}
-.tag-legendary{background:rgba(255,170,0,0.15);color:#FFB400}
-
-/* JOIN / CTA */
-.join-section{
-  text-align:center;padding:6rem 2rem;
-  background:var(--bg);border-top:1px solid var(--border);
-}
-.join-section h2{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;letter-spacing:-1.5px;margin-bottom:1rem}
-.join-section p{color:var(--muted);margin-bottom:2rem;font-size:0.95rem}
-.join-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.discord-btn{
-  font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
-  color:#fff;background:var(--discord);padding:0.85rem 2rem;border-radius:8px;
-  text-decoration:none;transition:background 0.2s,transform 0.15s;
-}
-.discord-btn:hover{background:var(--discord-dark);transform:translateY(-2px)}
-
-footer{
-  padding:1.5rem 2rem;border-top:1px solid var(--border);
-  display:flex;justify-content:space-between;align-items:center;
-  background:var(--bg2);flex-wrap:wrap;gap:1rem;
-}
-.footer-copy{font-size:0.68rem;color:var(--muted)}
-.footer-logo{font-size:1rem;font-weight:900;color:var(--y)}
-.footer-links{display:flex;gap:1.2rem}
-.footer-links a{font-size:0.68rem;color:var(--muted);text-decoration:none;transition:color 0.2s}
-.footer-links a:hover{color:var(--y)}
-
-@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.6s,transform 0.6s}
-.fade-in.show{opacity:1;transform:translateY(0)}
+  footer{text-align:center;margin-top:30px;font-size:11px;color:var(--text-dim);}
 </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Monster Energy checklist</h1>
+    <p>Tap a can flavor to mark it tried. Progress saves automatically.</p>
+  </header>
 
-<nav>
-  <div class="nav-logo">HVNNER<span></span></div>
-  <ul class="nav-links">
-    <li><a href="#clips">Streams</a></li>
-    <li><a href="#server">Server</a></li>
-    <li><a href="#links">Socials</a></li>
-    <li><a href="https://discord.gg" class="nav-discord">Discord</a></li>
-  </ul>
-</nav>
+  <div class="progress-bar-outer"><div class="progress-bar-inner" id="bar"></div></div>
+  <div class="progress-label" id="progress-text">Loading…</div>
 
-<div class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-tag">Streaming on YouTube</div>
-  <h1><span class="hl">HVNNER</span></h1>
-  <p class="hero-sub">Streams, clips, and good vibes. Join the community — the server is coming soon.</p>
-  <div class="hero-btns">
-    <a href="https://youtube.com/@hvnner" class="btn-y">Watch hvnner</a>
-    <a href="https://discord.gg" class="discord-btn">Join Discord</a>
-    <a href="#server" class="btn-outline">Server info</a>
+  <div class="controls">
+    <button class="ctrl" id="clear-btn">Clear all</button>
   </div>
+
+  <div id="sections"></div>
+
+  <footer>Data stored privately on this device/account only.</footer>
 </div>
-
-<div class="ticker">
-  <div class="ticker-inner">
-    <div class="ticker-item">Streaming Every Week</div>
-    <div class="ticker-item">Server Coming Soon</div>
-    <div class="ticker-item">Subscribe on YouTube</div>
-    <div class="ticker-item">New Crates</div>
-    <div class="ticker-item">Join the Discord</div>
-    <div class="ticker-item">Streaming Every Week</div>
-    <div class="ticker-item">Server Coming Soon</div>
-    <div class="ticker-item">Subscribe on YouTube</div>
-    <div class="ticker-item">New Crates</div>
-    <div class="ticker-item">Join the Discord</div>
-  </div>
-</div>
-
-<!-- DISCORD SECTION -->
-<div class="discord-section" id="discord">
-  <div class="discord-inner">
-    <div class="discord-left fade-in">
-      <div class="discord-badge">
-        <span class="discord-badge-dot"></span>
-        Community
-      </div>
-      <div class="discord-title">Join the <span>Discord</span></div>
-      <p class="discord-desc">Hang out, get server updates, flex your in-game wins, and be the first to know when the server goes live.</p>
-      <div class="discord-perks">
-        <div class="discord-perk"><div class="discord-perk-icon">🔔</div>Server launch notifications</div>
-        <div class="discord-perk"><div class="discord-perk-icon">🎮</div>Minecraft events & giveaways</div>
-        <div class="discord-perk"><div class="discord-perk-icon">💬</div>Chat with hvnner directly</div>
-        <div class="discord-perk"><div class="discord-perk-icon">🏆</div>Exclusive roles for members</div>
-      </div>
-    </div>
-    <div class="discord-right fade-in">
-      <a href="https://discord.gg" class="btn-discord-big">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-        Join the Discord
-      </a>
-      <div class="discord-members">
-        <span class="discord-members-dot"></span>
-        Server launching soon — be first in
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CLIPS -->
-<section class="clips-section" id="clips">
-  <div class="sec-label fade-in">Stream highlights</div>
-  <div class="sec-title fade-in">Best clips</div>
-  <p class="sec-sub fade-in">The wildest moments from hvnner's streams. Swap in real YouTube links when you're ready.</p>
-  <div class="clips-grid">
-    <div class="clip-card fade-in">
-      <div class="clip-thumb">
-        <div class="clip-letter">1</div>
-        <div class="play-btn"><div class="play-icon"></div></div>
-      </div>
-      <div class="clip-info">
-        <div class="clip-badge">Featured</div>
-        <div class="clip-title">That one insane clutch moment</div>
-        <div class="clip-meta">2.1k views · 3 days ago</div>
-      </div>
-    </div>
-    <div class="clip-card fade-in">
-      <div class="clip-thumb">
-        <div class="clip-letter">2</div>
-        <div class="play-btn"><div class="play-icon"></div></div>
-      </div>
-      <div class="clip-info">
-        <div class="clip-title">Base tour — season one</div>
-        <div class="clip-meta">845 views · 1 week ago</div>
-      </div>
-    </div>
-    <div class="clip-card fade-in">
-      <div class="clip-thumb">
-        <div class="clip-letter">3</div>
-        <div class="play-btn"><div class="play-icon"></div></div>
-      </div>
-      <div class="clip-info">
-        <div class="clip-title">First stream highlights</div>
-        <div class="clip-meta">612 views · 2 weeks ago</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVER -->
-<section class="server-section" id="server">
-  <div class="sec-label fade-in">Minecraft server</div>
-  <div class="sec-title fade-in">Join the server</div>
-  <p class="sec-sub fade-in">Survival, ranks, crates, and community events. Something for every kind of player.</p>
-  <div class="server-intro fade-in">
-    <div class="server-dot"></div>
-    <div>
-      <div class="server-ip">Server IP: Coming soon</div>
-      <div class="server-players">Be the first in — join Discord for the launch announcement</div>
-    </div>
-  </div>
-  <div class="sec-label2 fade-in">Ranks</div>
-  <div class="ranks-grid">
-    <div class="rank-card wood fade-in">
-      <span class="rank-icon">🪵</span>
-      <div class="rank-name">Wood</div>
-      <div class="rank-desc">Starter rank. Free for everyone.</div>
-    </div>
-    <div class="rank-card stone fade-in">
-      <span class="rank-icon">🪨</span>
-      <div class="rank-name">Stone</div>
-      <div class="rank-desc">Extra homes & kit access.</div>
-    </div>
-    <div class="rank-card iron fade-in">
-      <span class="rank-icon">⚙️</span>
-      <div class="rank-name">Iron</div>
-      <div class="rank-desc">Fly in claims, /nick command.</div>
-    </div>
-    <div class="rank-card gold fade-in">
-      <span class="rank-icon">⭐</span>
-      <div class="rank-name">Gold</div>
-      <div class="rank-desc">Colored chat, crate keys weekly.</div>
-    </div>
-    <div class="rank-card diamond fade-in">
-      <span class="rank-icon">💎</span>
-      <div class="rank-name">Diamond</div>
-      <div class="rank-desc">Priority queue, custom prefix.</div>
-    </div>
-    <div class="rank-card netherite fade-in">
-      <span class="rank-icon">🔥</span>
-      <div class="rank-name">Netherite</div>
-      <div class="rank-desc">Top tier. All perks + Discord role.</div>
-    </div>
-  </div>
-  <div class="sec-label2 fade-in">Crates</div>
-  <div class="crates-grid">
-    <div class="crate-card fade-in">
-      <span class="crate-icon">📦</span>
-      <div class="crate-name">Iron Crate</div>
-      <div class="crate-desc">Basic loot — tools, food, and starter gear to get you going.</div>
-      <span class="crate-tag tag-common">Common</span>
-    </div>
-    <div class="crate-card fade-in">
-      <span class="crate-icon">🗃️</span>
-      <div class="crate-name">Gold Crate</div>
-      <div class="crate-desc">Enchanted gear, rare resources, and bonus XP rewards.</div>
-      <span class="crate-tag tag-rare">Rare</span>
-    </div>
-    <div class="crate-card fade-in">
-      <span class="crate-icon">🔮</span>
-      <div class="crate-name">Diamond Crate</div>
-      <div class="crate-desc">Custom items, rank vouchers, and exclusive cosmetics.</div>
-      <span class="crate-tag tag-epic">Epic</span>
-    </div>
-    <div class="crate-card fade-in">
-      <span class="crate-icon">👑</span>
-      <div class="crate-name">Netherite Crate</div>
-      <div class="crate-desc">God gear, special titles, and one-of-a-kind server loot.</div>
-      <span class="crate-tag tag-legendary">Legendary</span>
-    </div>
-  </div>
-</section>
-
-<!-- SOCIALS / LINKS HUB -->
-<section class="links-section" id="links">
-  <div class="links-inner">
-    <div class="sec-label fade-in">Find hvnner</div>
-    <div class="sec-title fade-in">Socials & links</div>
-    <p class="sec-sub fade-in">Everything in one place. Click to follow, subscribe, and stay connected.</p>
-    <div class="links-grid">
-      <a href="https://youtube.com/@hvnner" class="link-card fade-in">
-        <div class="link-icon yt">▶</div>
-        <div>
-          <div class="link-label">YouTube</div>
-          <div class="link-name">@hvnner</div>
-        </div>
-        <span class="link-arrow">→</span>
-      </a>
-      <a href="https://discord.gg" class="link-card fade-in">
-        <div class="link-icon dc">💬</div>
-        <div>
-          <div class="link-label">Discord</div>
-          <div class="link-name">hvnner server</div>
-        </div>
-        <span class="link-arrow">→</span>
-      </a>
-      <a href="https://twitter.com" class="link-card fade-in">
-        <div class="link-icon tw">𝕏</div>
-        <div>
-          <div class="link-label">Twitter / X</div>
-          <div class="link-name">@hvnner</div>
-        </div>
-        <span class="link-arrow">→</span>
-      </a>
-      <a href="https://tiktok.com" class="link-card fade-in">
-        <div class="link-icon tk">♪</div>
-        <div>
-          <div class="link-label">TikTok</div>
-          <div class="link-name">@hvnner</div>
-        </div>
-        <span class="link-arrow">→</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- JOIN CTA -->
-<section class="join-section" id="join">
-  <h2 class="fade-in">Ready to <span style="color:var(--y)">play?</span></h2>
-  <p class="fade-in">Subscribe on YouTube and join the Discord to get notified when the server opens.</p>
-  <div class="join-btns">
-    <a href="https://youtube.com/@hvnner" class="btn-y fade-in">Subscribe on YouTube</a>
-    <a href="https://discord.gg" class="discord-btn fade-in">Join the Discord</a>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-logo">Hvnner</div>
-  <div class="footer-links">
-    <a href="#clips">Streams</a>
-    <a href="#server">Server</a>
-    <a href="#links">Socials</a>
-    <a href="https://discord.gg/HvQQQfE5YQ">Discord</a>
-  </div>
-  <div class="footer-copy">© 2026 hvnnerMC. All rights reserved.</div>
-</footer>
 
 <script>
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach((e,i) => {
-    if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('show'), i*70);
-      obs.unobserve(e.target);
-    }
+const DATA = [
+  {
+    title: "Main Monster energy lines",
+    items: ["Original Monster","Monster Ultra","Juice Monster","Rehab Monster","Java Monster","Monster Reserve","Monster Import","Punch Monster","Hydro Monster","Dragon Tea","Killer Brew","Espresso Monster","Muscle Monster"]
+  },
+  {
+    title: "Popular original / mainline flavors",
+    items: ["Original Green \"OG\"","Low-Carb","Zero Sugar","Absolutely Zero","Import","Nitro Super Dry","Ultra Cosmic Peach","Orange Dreamsicle","Peaches N' Crème","White Pineapple","Watermelon","Assault","The Doctor","Lando Norris","Electric Blue"]
+  },
+  {
+    title: "Monster Ultra flavors",
+    items: ["Ultra Zero \"White\"","Ultra Blue","Ultra Red","Ultra Black","Ultra Violet","Ultra Sunrise","Ultra Paradise","Ultra Fiesta Mango","Ultra Rosa","Ultra Watermelon","Ultra Peachy Dreams","Ultra Strawberry Dreams","Ultra Ruby Red","Ultra Vice","Ultra Blue Hawaiian","Ultra Wild Passion","Ultra Pink Lemonade","Ultra Red Raz"]
+  },
+  {
+    title: "Juice / Punch Monster flavors",
+    items: ["Mango Loco","Pacific Punch","Pipeline Punch","Rio Punch","Aussie Lemonade","Khaotic","Viking Berry","Bad Apple","Voodoo Grape","Strawberry Lemonade","Ripper","M-80","Khaos","Mixxd"]
+  },
+  {
+    title: "Rehab Monster flavors",
+    items: ["Tea + Lemonade","Peach Tea","Green Tea","Wild Berry Tea","Strawberry Tea","Watermelon Tea","Dragonade"]
+  },
+  {
+    title: "Java Monster flavors",
+    items: ["Mean Bean","Loco Moco","Salted Caramel","Cafe Latte","Irish Crème","French Vanilla","Mocha","Kona Blend","Vanilla Light"]
+  }
+];
+
+const STORAGE_KEY = "monster-checklist-state";
+let state = {};
+const sectionsEl = document.getElementById('sections');
+const barEl = document.getElementById('bar');
+const progressText = document.getElementById('progress-text');
+
+function slug(section, item){
+  return (section + "__" + item).toLowerCase().replace(/[^a-z0-9]+/g,'-');
+}
+
+function totalCount(){
+  return DATA.reduce((sum,s)=>sum+s.items.length,0);
+}
+
+function render(){
+  sectionsEl.innerHTML = "";
+  DATA.forEach(section=>{
+    const secDiv = document.createElement('div');
+    secDiv.className = 'section';
+
+    const checkedInSection = section.items.filter(i=>state[slug(section.title,i)]).length;
+
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'section-title';
+    titleDiv.innerHTML = '<span>'+section.title+'</span><span class="count">'+checkedInSection+' / '+section.items.length+'</span>';
+    secDiv.appendChild(titleDiv);
+
+    const gridDiv = document.createElement('div');
+    gridDiv.className = 'grid';
+
+    section.items.forEach(item=>{
+      const key = slug(section.title,item);
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'item' + (state[key] ? ' checked' : '');
+      itemDiv.innerHTML = '<div class="box"></div><div class="label">'+item+'</div>';
+      itemDiv.addEventListener('click', ()=>toggle(key));
+      gridDiv.appendChild(itemDiv);
+    });
+
+    secDiv.appendChild(gridDiv);
+    sectionsEl.appendChild(secDiv);
   });
-},{threshold:0.1});
-document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = totalCount();
+  const checked = Object.values(state).filter(Boolean).length;
+  const pct = total ? Math.round((checked/total)*100) : 0;
+  barEl.style.width = pct + '%';
+  progressText.innerHTML = '<strong>'+checked+' / '+total+'</strong> tried &middot; '+pct+'%';
+}
+
+async function toggle(key){
+  state[key] = !state[key];
+  render();
+  try{
+    await window.storage.set(STORAGE_KEY, JSON.stringify(state));
+  }catch(e){
+    console.error('Save failed', e);
+  }
+}
+
+async function loadState(){
+  try{
+    const result = await window.storage.get(STORAGE_KEY);
+    state = result ? JSON.parse(result.value) : {};
+  }catch(e){
+    state = {};
+  }
+  render();
+}
+
+document.getElementById('clear-btn').addEventListener('click', async ()=>{
+  if(!confirm('Clear all checked flavors?')) return;
+  state = {};
+  render();
+  try{
+    await window.storage.set(STORAGE_KEY, JSON.stringify(state));
+  }catch(e){
+    console.error('Clear failed', e);
+  }
+});
+
+loadState();
 </script>
+</body>
+</html>
